@@ -1,34 +1,28 @@
 public class ListNode<T extends Comparable<T> > {
 
-    public Node<T> head = null;
+    private Node<T> head = null;
 
-    public ListNode( Node<T> head){
+    private ListNode( Node<T> head){
         this.head = head;
     }
-    public void insert( Node<T> newNode ){
 
-        newNode.next = head;
-        head = newNode;
+    private void insert( Node<T> newNode ){
+
+        Node<T> current = head;
+
+        if ( newNode instanceof Comparable ){
+
+            while ( newNode.element.compareTo( current.element) <= 0 && current != null  ){
+                current = current.next;
+            }
+            newNode.next = current;
+
+        }
+
+
     }
 
-    /*    public void insert( Node<T> newNode ){
-
-            Node<T> current = head;
-            while ( current != null){
-                if ( newNode instanceof Comparable ){
-                    Comparable <T> newNode2 = (Comparable) newNode;
-                     while ( newNode2.compareTo((T) current) <= 0 ){
-                         newNode.next = current.next;
-                         current.next = newNode;
-
-                         current = current.next;
-                     }
-                }
-
-            }
-        }
-    */
-    public void print(){
+    private void print(){
         Node<T> current = head;
 
         System.out.println("Liste :");
