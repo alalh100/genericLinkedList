@@ -6,28 +6,31 @@ public class ListNode<T extends Comparable<T> > {
 
         this.head = head;
     }
-/*
+
     private void insert( Node<T> newNode ){
 
-            newNode.next = head;
-            head = newNode;
-    }
-*/
-    private void insert( Node<T> newNode ){
+        Node<T> current = head;                            // to go through the list
+        Node<T> preCurrent = null;                         // to know the Node before current
 
-        Node<T> current = head;
+        //add at the beginning of the list
         if (newNode.element.compareTo( current.element) <= 0 ){
             newNode.next = head;
             head = newNode;
         }else {
-
+            // this while loop is used to put "current" at the right place to add the new element
             while (newNode.element.compareTo(current.element) > 0 && current.next != null) {
-
+                preCurrent = current;
                 current = current.next;
-
             }
-            newNode.next = current.next;
-            current.next = newNode;
+            // add at the end of the list
+            if(newNode.element.compareTo(current.element) > 0 && current.next == null){
+                current.next = newNode;
+            }
+            // add the element at a specific place
+            else {
+                newNode.next = preCurrent.next;
+                preCurrent.next = newNode;
+            }
         }
 
     }
@@ -55,6 +58,7 @@ public class ListNode<T extends Comparable<T> > {
         root.insert(new Node<> (12));
         root.insert(new Node<> (10));
         root.insert(new Node<> (1));
+        root.insert(new Node<> (8));
         root.print();
     }
 
